@@ -34,7 +34,7 @@ class FlexibleStringTemplate extends EnhancedStringTemplate
      * @param array $config A set of templates to add.
      * @param callable $callback A general callback that will be called before
      * retrieving any templates.
-     * @param \Bootstrap\View\arra $callbacks An array of callbacks.
+     * @param array $callbacks An array of callbacks.
      */
     public function __construct(array $config = [], ?callable $callback = null, array $callbacks = [])
     {
@@ -48,7 +48,6 @@ class FlexibleStringTemplate extends EnhancedStringTemplate
      *
      * @param string $name The template name.
      * @param array  $data The data to insert.
-     *
      * @return string
      */
     public function format($name, array $data): string
@@ -63,7 +62,6 @@ class FlexibleStringTemplate extends EnhancedStringTemplate
      *
      * @param string $name The original name of the template.
      * @param array $data The data to update.
-     *
      * @return string The new name of the template.
      */
     protected function _getTemplateName($name, array &$data = [])
@@ -71,7 +69,7 @@ class FlexibleStringTemplate extends EnhancedStringTemplate
         if (isset($this->_callbacks[$name])) {
             $data = call_user_func($this->_callbacks[$name], $data);
         }
-        if ($this->_callback) {
+        if (is_callable($this->_callback)) {
             $data = call_user_func($this->_callback, $name, $data);
         }
         if (isset($data['templateName'])) {

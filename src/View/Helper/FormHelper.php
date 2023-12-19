@@ -21,7 +21,6 @@ use Bootstrap\View\FlexibleStringTemplateTrait;
  *
  * @property \Bootstrap\View\Helper\HtmlHelper $Html
  * @property \Cake\View\Helper\UrlHelper $Url
- *
  * @link http://book.cakephp.org/3.0/en/views/helpers/form.html
  */
 class FormHelper extends \Cake\View\Helper\FormHelper
@@ -35,7 +34,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @var array
      */
-    public $helpers = [
+    public array $helpers = [
         'Url', 'Html',
     ];
 
@@ -53,7 +52,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'idPrefix' => null,
         'errorClass' => 'is-invalid',
         'typeMap' => [
@@ -142,7 +141,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @var array
      */
-    protected $_defaultWidgets = [
+    protected array $_defaultWidgets = [
         '_default' => ['Cake\View\Widget\BasicWidget'],
         'button' => ['Cake\View\Widget\ButtonWidget'],
         'checkbox' => ['Cake\View\Widget\CheckboxWidget'],
@@ -174,7 +173,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
     public $inline = false;
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function __construct(\Cake\View\View $View, array $config = [])
     {
@@ -191,7 +190,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
                     'inputColumnClass' => $this->_getColumnClass('input'),
                     'labelColumnClass' => $this->_getColumnClass('label'),
                 ];
-                if (!$that->getTemplates($data['templateName'])) {
+                if (!$that->checkTemplates($data['templateName'])) {
                     $data['templateName'] = $name;
                 }
 
@@ -505,9 +504,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    protected function _getInput(string $fieldName, array $options)
+    protected function _getInput(string $fieldName, array $options): array|string
     {
         $label = $options['labelOptions'];
         switch (strtolower($options['type'])) {
@@ -522,7 +521,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected function _inputLabel(string $fieldName, $label = null, array $options = []): string
     {
@@ -552,7 +551,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * @param string $fieldName Name of a field, like this "modelname.fieldname"
      * @param array|\Traversable $options Radio button options array.
      * @param array $attributes Array of attributes.
-     *
      * @return string Completed radio widget set.
      */
     public function inlineRadio(string $fieldName, $options = [], array $attributes = []): string
@@ -715,7 +713,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * @param array $menu HTML elements corresponding to menu options (which will be wrapped
      * into `<li>` tag). To add separator, pass 'divider'. See `BootstrapHtml::dropdown()`.
      * @param array $options Array of options for the button. See `button()`.
-     *
      * @return string A HTML string containing the button dropdown.
      */
     public function dropdownButton(string $title, array $menu = [], array $options = []): string
@@ -802,5 +799,16 @@ class FormHelper extends \Cake\View\Helper\FormHelper
         }
 
         return $this->submit($caption, $options);
+    }
+
+    /**
+     * Check and gets templates to use or a specific template.
+     *
+     * @param string|null $template String for reading a specific template, null for all.
+     * @return array|string|null
+     */
+    public function checkTemplates(?string $template = null)
+    {
+        return $this->templater()->get($template);
     }
 }

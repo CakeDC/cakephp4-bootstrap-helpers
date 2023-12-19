@@ -34,10 +34,10 @@ define('CONFIG', APP . 'config' . DS);
 define('CACHE', TMP);
 define('LOGS', TMP);
 
-$loader = new \Cake\Core\ClassLoader();
-$loader->register();
+// $loader = new \Cake\Core\ClassLoader();
+// $loader->register();
 
-$loader->addNamespace('TestApp', APP);
+// $loader->addNamespace('TestApp', APP);
 
 require_once CORE_PATH . 'config/bootstrap.php';
 

@@ -15,6 +15,7 @@ namespace Bootstrap\Test\TestCase\View\Helper;
 use Bootstrap\View\Helper\ModalHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
+use function Cake\I18n\__ as __;
 
 class ModalHelperTest extends TestCase
 {
@@ -42,8 +43,8 @@ class ModalHelperTest extends TestCase
 
     public function testCreate()
     {
-        $title = "My Modal";
-        $id = "myModalId";
+        $title = 'My Modal';
+        $id = 'myModalId';
         // Test standard create without ID
         $result = $this->modal->create($title);
         $expected = [

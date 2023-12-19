@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bootstrap\View\Widget;
 
 use Cake\View\Widget\WidgetInterface;
+use function Cake\I18n\__ as __;
 
 /**
  * Form 'widget' for creating fancy file widgets made of a button
@@ -115,7 +116,7 @@ class FancyFileWidget implements WidgetInterface
         $fileInput = $this->_file->render($data + [
             'style' => 'display: none;',
             'onchange' => "document.getElementById('" . $data['id'] . "-input').value = " .
-                "(this.files.length <= 1) ? " .
+                '(this.files.length <= 1) ? ' .
                 "(this.files.length ? this.files[0].name : '') " .
                 ": this.files.length + ' ' + '" . $countLabel . "';",
             'escape' => false,
@@ -158,7 +159,7 @@ class FancyFileWidget implements WidgetInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function secureFields(array $data): array
     {

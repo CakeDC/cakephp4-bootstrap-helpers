@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bootstrap\View\Helper;
 
 use Bootstrap\Utility\Matching;
+use function Cake\I18n\__ as __;
 
 /**
  * Html Helper class for easy use of HTML widgets.
@@ -40,7 +41,7 @@ class HtmlHelper extends \Cake\View\Helper\HtmlHelper
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'meta' => '<meta{{attrs}}/>',
             'metalink' => '<link href="{{url}}"{{attrs}}/>',
@@ -134,7 +135,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function link($title, $url = null, array $options = []): string
     {
@@ -144,9 +145,8 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     }
 
     /**
-     * Create a Twitter Bootstrap badge.
-     *
      * {@inheritDoc}
+     *
      * @deprecated 4.0.0 Use the badge() instead.
      */
     public function label($text, $type = null, $options = [])
@@ -370,7 +370,6 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * @param array $menu HTML tags corresponding to menu options (which will be wrapped
      *              into `<li>` tag). To add separator, pass `'divider'`.
      * @param array $options Attributes for the wrapper (change it with tag).
-     *
      * @return string
      */
     public function dropdown(array $menu = [], array $options = [])

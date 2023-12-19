@@ -20,6 +20,7 @@ use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
+use function Cake\I18n\__ as __;
 
 class NavbarHelperTest extends TestCase
 {
@@ -338,7 +339,8 @@ class NavbarHelperTest extends TestCase
 
         // Customt tests
 
-        Router::scope('/', function (RouteBuilder $routes) {
+        $builder = Router::createRouteBuilder('/', []);
+        $builder->scope('/', function (RouteBuilder $routes): void {
             $routes->fallbacks(DashedRoute::class);
         });
         Router::fullBaseUrl('/cakephp/pages/view/1');
@@ -374,7 +376,9 @@ class NavbarHelperTest extends TestCase
         $this->assertHtml($expected, $result);
 
         // More custom tests...
-        Router::scope('/', function (RouteBuilder $routes) {
+
+        $builder = Router::createRouteBuilder('/', []);
+        $builder->scope('/', function (RouteBuilder $routes): void {
             $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']); // (1)
             $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']); // (2)
             $routes->fallbacks(DashedRoute::class);

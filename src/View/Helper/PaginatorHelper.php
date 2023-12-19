@@ -32,7 +32,7 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper
      *
      * @var array
      */
-    public $helpers = [
+    public array $helpers = [
         'Url', 'Number', 'Html',
     ];
 
@@ -54,7 +54,8 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
+        'params' => [],
         'options' => [],
         'templates' => [
             'nextActive' => '<li class="page-item"><a href="{{url}}" class="page-link">{{text}}</a></li>',
@@ -127,7 +128,6 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper
      *
      * - `before` Content to be inserted before the numbers, but after the first links.
      * - `after` Content to be inserted after the numbers, but before the last links.
-     * - `model` Model to create numbers for, defaults to PaginatorHelper::defaultModel()
      * - `modulus` How many numbers to include on either side of the current page, defaults
      * to 8. Set to `false` to disable and to show all numbers.
      * - `first` Whether you want first links generated, set to an integer to define the
@@ -155,7 +155,7 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper
     public function numbers(array $options = []): string
     {
         $defaults = [
-            'before' => null, 'after' => null, 'model' => $this->defaultModel(),
+            'before' => null, 'after' => null,
             'modulus' => 8, 'first' => null, 'last' => null, 'url' => [],
             'prev' => null, 'next' => null, 'class' => '', 'size' => false,
         ];
@@ -177,9 +177,9 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper
         $options['after'] = '</ul>' . $options['after'];
         unset($options['class']);
 
-        $params = (array)$this->params($options['model']) + ['page' => 1];
+        $params = (array)$this->params() + ['page' => 1];
         if ($params['pageCount'] <= 1) {
-            return false;
+            return '';
         }
 
         $templater = $this->templater();

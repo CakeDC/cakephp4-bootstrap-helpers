@@ -25,7 +25,7 @@ trait UrlComparerTrait
      *
      * @var array
      */
-    protected $_parts = ['plugin', 'prefix', 'controller', 'action', 'pass'];
+    protected array $_parts = ['plugin', 'prefix', 'controller', 'action', 'pass'];
 
     /**
      * Retrieve the relative path of the root URL from hostname.

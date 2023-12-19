@@ -14,6 +14,7 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
+use function Cake\I18n\__ as __;
 
 /**
  * Modal helper library.
@@ -33,7 +34,7 @@ class ModalHelper extends Helper
      *
      * @var array
      */
-    public $helpers = [
+    public array $helpers = [
         'Html',
     ];
 
@@ -42,7 +43,7 @@ class ModalHelper extends Helper
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'modalStart' => '<div class="modal fade{{attrs.class}}" tabindex="-1" role="dialog"{{attrs}} aria-hidden="true">{{dialogStart}}{{contentStart}}',
             'modalEnd' => '{{contentEnd}}{{dialogEnd}}</div>',

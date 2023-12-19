@@ -14,6 +14,7 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
+use function Cake\I18n\__ as __;
 
 /**
  * Navbar helper library.
@@ -36,7 +37,7 @@ class NavbarHelper extends Helper
      *
      * @var array
      */
-    public $helpers = [
+    public array $helpers = [
         'Html', 'Url',
     ];
 
@@ -50,7 +51,7 @@ class NavbarHelper extends Helper
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'navbarStart' => '<nav class="navbar{{attrs.class}}"{{attrs}}>{{containerStart}}{{header}}{{responsiveStart}}',
             'navbarEnd' => '{{responsiveEnd}}{{containerEnd}}</nav>',
@@ -316,6 +317,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      * - `templateVars` Provide template variables for the header template.
      * - Other attributes will be assigned to the header element.
      * *
+     *
      * @param string $name Title of the header.
      * @param array $options Array of options for the wrapper tag.
      * @return string A HTML header tag.

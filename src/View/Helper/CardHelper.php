@@ -15,6 +15,7 @@ namespace Bootstrap\View\Helper;
 use Bootstrap\Utility\StackedStates;
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
+use function Cake\Core\h as h;
 
 /**
  * Card helper library.
@@ -34,7 +35,7 @@ class CardHelper extends Helper
      *
      * @var array
      */
-    public $helpers = [
+    public array $helpers = [
         'Html',
     ];
 
@@ -45,7 +46,7 @@ class CardHelper extends Helper
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'cardGroupStart' => '<div role="tablist"{{attrs}}>',
             'cardGroupEnd' => '</div>',
@@ -89,9 +90,7 @@ class CardHelper extends Helper
     protected $_groupCount = 0;
 
     /**
-     * Create card helper
-     *
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function __construct(\Cake\View\View $View, array $config = [])
     {
@@ -332,7 +331,7 @@ class CardHelper extends Helper
         $out = $this->formatTemplate($current . 'End', []);
         if ($this->_states->getValue('collapsible')) {
             $ctplt = $current . 'CollapsibleEnd';
-            if ($this->getTemplates($ctplt)) {
+            if ($this->checkTemplates($ctplt)) {
                 $out = $this->formatTemplate($ctplt, [
                     $current . 'End' => $out,
                 ]);
@@ -652,5 +651,16 @@ class CardHelper extends Helper
         }
 
         return $this->_createFooter($text, $options);
+    }
+
+    /**
+     * Check and gets templates to use or a specific template.
+     *
+     * @param string|null $template String for reading a specific template, null for all.
+     * @return array|string|null
+     */
+    public function checkTemplates(?string $template = null)
+    {
+        return $this->templater()->get($template);
     }
 }

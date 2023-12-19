@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bootstrap\View\Widget;
 
 use Cake\View\Widget\RadioWidget;
+use function Cake\Core\h as h;
 
 /**
  * Input widget class for generating a set of inline radio buttons.
